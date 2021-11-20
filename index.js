@@ -2,16 +2,44 @@ let balance = 500.00;
 
 class Withdrawal {
 
-  constructor(amount) {
-    this.amount = amount;
+  constructor(user) {
+    this.user= user;
+    this.transactions = []
+  }
+
+  get balance() {
+    let sum = 0
+    this.transactions.map(value => {sum += value})
+    return sum
+  }
+addTransaction(value) {this.transactions.push(value);}
+}
+class Transaction {
+  constructor(amount, account) {
+    this.account = account
+    this.amount = amount
   }
 
   commit() {
     balance -= this.amount;
+    this.account.addTransaction(this.value());
+    return true;
   }
-
 }
 
+
+
+class Withdrawal extends Transaction {
+value() {
+  return -this.amount;
+}
+commit() {
+  if((this.account.balance - this.amount) < 0 {
+    return false
+  }
+}
+else
+}
 
 
 
